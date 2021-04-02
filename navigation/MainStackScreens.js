@@ -13,31 +13,35 @@ const MainStack = createMaterialBottomTabNavigator();
 function MainStackScreens({ navigation }) {
     return(
         <MainStack.Navigator
-            initialRouteName="Shop"
+            initialRouteName="Products"
             activeColor="#fff"
             barStyle={{ backgroundColor: '#832438' }}
             >
-            <MainStack.Screen 
-            name="HomeScreen" 
-            component={HomeScreen}
-            options={{
-                tabBarLabel: 'Home',
-                tabBarIcon: ({ color }) => (
-                <Icon name="ios-home" color={color} size={26} />
-                ),
-            }}
 
-            />
             <MainStack.Screen 
             name="ViewProducts" 
             component={ViewProducts}
             options={{
                 tabBarLabel: 'Products',
                 tabBarIcon: ({ color }) => (
-                <Icon name="cart" color={color} size={26} />
+                <Icon name="ios-home" color={color} size={27} />
                 ),
             }}
+
+
             />
+            <MainStack.Screen 
+            name="HomeScreen" 
+            component={HomeScreen}
+            options={{
+                tabBarLabel: 'Profile',
+                tabBarIcon: ({ color }) => (
+                <Icon name="person" color={color} size={27}/>
+                ),
+            }}
+
+            />
+            
             <MainStack.Screen 
             name="CartScreen" 
             component={CartScreen}
@@ -48,6 +52,7 @@ function MainStackScreens({ navigation }) {
                 ),
             }}
             />
+
         </MainStack.Navigator>
     )
 }

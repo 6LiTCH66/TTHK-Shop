@@ -13,7 +13,6 @@ import Cart from '../screens/Cart';
 const MyStack = createStackNavigator();
 
 
-
 class CartScreen extends React.Component {
     render() {
         return (
@@ -23,7 +22,7 @@ class CartScreen extends React.Component {
                 },
                 headerTintColor: '#fff'
             }}>
-                <MyStack.Screen name="CartScreen" component={Cart} options={{
+                <MyStack.Screen name="Cart" component={Cart} options={{
                     headerLeft: () => (
                         <Icon.Button 
                         name="ios-menu" 

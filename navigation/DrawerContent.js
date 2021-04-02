@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import { Avatar, Title, Drawer,} from 'react-native-paper';
+import { Avatar, Title, Drawer, Caption,} from 'react-native-paper';
 
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 
@@ -8,30 +8,12 @@ import { logout } from '../components/Firebase/firebase'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { db, auth } from '../components/Firebase/firebase';
+import { auth } from '../components/Firebase/firebase';
 
 import GetUser from '../functions/GetUser';
 
 
 export default function DrawerContent(props) {
-    /*
-    async function getMarker() {
-        const markers = [];
-        await db.collection('users').get()
-            .then(querySnapshot => {
-            querySnapshot.docs.forEach(doc => {
-                console.log(doc.data().secondname);
-                markers.push(doc.data().secondname);
-                });
-        });
-        return markers;
-    }
-    console.log(getMarker())
-    */
-
-
-    
-
     return(
         <View style={{flex:1}}>
             <DrawerContentScrollView {...props}>
@@ -55,6 +37,7 @@ export default function DrawerContent(props) {
                                                 <Text></Text>
                                             )}
                                     </Title>
+                                    <Caption style={styles.caption}>{auth.currentUser.email}</Caption>
                             </View>
                         </View>
                     </View>
@@ -62,13 +45,37 @@ export default function DrawerContent(props) {
                         <DrawerItem
                             icon={({color, size}) => (
                                 <Icon 
-                                    name='home-outline'
+                                    name='account-cowboy-hat'
                                     color = {color}
                                     size = {size}
                                 />
                             )}
-                            label="Home"
+                            label="My profile"
                             onPress = {() => {props.navigation.navigate("HomeScreen")}}
+                        />
+
+                        <DrawerItem
+                            icon={({color, size}) => (
+                                <Icon 
+                                    name='shopping'
+                                    color = {color}
+                                    size = {size}
+                                />
+                            )}
+                            label="Products"
+                            onPress = {() => {props.navigation.navigate("ViewProducts")}}
+                        />
+
+                        <DrawerItem
+                            icon={({color, size}) => (
+                                <Icon 
+                                    name='cart'
+                                    color = {color}
+                                    size = {size}
+                                />
+                            )}
+                            label="My cart"
+                            onPress = {() => {props.navigation.navigate("CartScreen")}}
                         />
                         
                     </Drawer.Section>

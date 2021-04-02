@@ -13,7 +13,6 @@ export default class Cart extends Component {
         super(props);
         this.state = {
             products: [],
-            totalQuantity: 0
         }
         
     }
@@ -27,12 +26,9 @@ export default class Cart extends Component {
                     name: child.val().name,
                     price: child.val().price,
                     quantity: child.val().quantity,
-                    
                 })
-                this.setState({ totalQuantity: this.state.totalQuantity += child.val().quantity })
                 
             })
-            console.log(this.state.totalQuantity)
             this.setState({products: prodArray});
 
         })
@@ -49,12 +45,9 @@ export default class Cart extends Component {
     increaseItem = (info) => {
         fire.ref('cart/'+ auth.currentUser.uid + "/products/" + info.productId).update({
             quantity: info.quantity += 1
-        })
-        
-
-        
-        
+        })  
     }
+
     decreaseItem = (info) => {
         if(info.quantity > 1){
             fire.ref('cart/'+ auth.currentUser.uid + "/products/" + info.productId).update({
@@ -62,17 +55,9 @@ export default class Cart extends Component {
             })
         }
     }
-    GetTotalQuantity = () => {
-        return(
-            <View>
-                {this.state.products.map((item)=>(
-                    <Text>{item}</Text>
-                ))}
-            </View>
-        )
+    deleteItem = (info) => {
+        fire.ref('cart/' + auth.currentUser.uid + '/products/' + info.productId).remove();
     }
-        
-    
 
     renderRightSide = (info) => (
         <View style={styles.renderRight}>
@@ -81,7 +66,7 @@ export default class Cart extends Component {
             <View style={styles.bottomItems}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start'}}>
                     <TouchableOpacity onPress={() => this.increaseItem(info)}>
-                        <Icon name="plus-circle" size={25} style={styles.iconLeft}/>
+                        <Icon name="plus-circle" size={30} style={styles.iconLeft}/>
                     </TouchableOpacity>
                 </View>
                 
@@ -89,14 +74,23 @@ export default class Cart extends Component {
                 
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
                     <TouchableOpacity onPress={() => this.decreaseItem(info)}>
-                        <Icon name="minus-circle" size={25} style={styles.iconRight}/>
+                        <Icon name="minus-circle" size={30} style={styles.iconRight}/>
                     </TouchableOpacity>
                 </View>
-                <Text>{this.state.totalQuantity}</Text>
+            </View>
+
+            <View style={styles.renderLeft}>
+                <View>
+                    <TouchableOpacity onPress={() => this.deleteItem(info)}>
+                        <Icon name="trash" size={45}/>
+                    </TouchableOpacity>
+                </View>
             </View>
             
         </View>
+
     )
+
 
     render(){
         return(
@@ -113,6 +107,7 @@ export default class Cart extends Component {
                                 <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                                     {this.renderItemHeader()}
                                     {this.renderRightSide(item)}
+                                    
                                 </View>
                             </Card>
                         )}
@@ -140,7 +135,8 @@ const styles = StyleSheet.create({
     },
     productList: {
         paddingHorizontal: 8,
-        paddingVertical: 5
+        paddingVertical: 5,
+        height: '100%',
     },
     itemFooter: {
         flexDirection: "row",
@@ -160,6 +156,7 @@ const styles = StyleSheet.create({
     renderRight: {
         width: 50,
         flex: 2,
+        //backgroundColor: 'blue'
     },
     image: {
         flex: 1,
@@ -182,16 +179,20 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     iconRight: {
-        width: 22,
-        color: 'red'
+        color: 'red',
     },
     iconLeft: {
-        width: 22,
-        color: 'green'
+        color: 'green',
     },
     textNumber: {
         fontWeight: 'bold',
         textAlign: 'center'
-    }
+    },
+    renderLeft:{
+        position: 'absolute',
+        right: 0,
+        marginTop: 40,
+        marginRight: 15,
+    } 
     
 })

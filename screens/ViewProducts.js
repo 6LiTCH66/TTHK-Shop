@@ -21,7 +21,7 @@ class ViewProducts extends React.Component {
                 },
                 headerTintColor: '#fff'
             }}>
-                <ProductsStack.Screen name="ViewProducts" component={Products} options={{
+                <ProductsStack.Screen name="Products" component={Products} options={{
                     headerLeft: () => (
                         <Icon.Button 
                         name="ios-menu" 

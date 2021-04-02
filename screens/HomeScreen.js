@@ -35,7 +35,7 @@ class HomeScreen extends React.Component {
                 },
                 headerTintColor: '#fff'
             }}>
-                <MyStack.Screen name="HomeScreen" component={Home} options={{
+                <MyStack.Screen name="Profile" component={Home} options={{
                     headerLeft: () => (
                         <Icon.Button 
                         name="ios-menu" 

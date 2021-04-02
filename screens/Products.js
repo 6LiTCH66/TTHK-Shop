@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { Button } from 'react-native-elements'
 
-import { fire, auth } from '../components/Firebase/firebase';
+import { fire, auth, fireStore } from '../components/Firebase/firebase';
 
 
 
@@ -16,7 +16,8 @@ export default class Products extends Component{
         super(props);
         this.state = {
             products: [],
-            userCart: []
+            userCart: [],
+            uri : ''
         }
         
     }
@@ -47,6 +48,10 @@ export default class Products extends Component{
             })
             this.setState({userCart: userArray})
         })
+
+        //const ref = fireStore.child('shop/img.jpg').getDownloadUrl();
+        //const url = ref.getDownloadURL();
+        //console.log(ref);
 
     }
 
