@@ -9,13 +9,14 @@ import ShoppingCartIcon from '../Icons/ShoppingCartIcon';
 
 import Products from '../screens/Products';
 
+import ProductDetail from '../screens/ProductDetail';
 
 const ProductsStack = createStackNavigator();
 
 class ViewProducts extends React.Component {
     render() {
         return (
-            <ProductsStack.Navigator screenOptions={{
+            <ProductsStack.Navigator initialRouteName="Products" screenOptions={{
                 headerStyle: {
                     backgroundColor: '#832438',
                 },
@@ -33,6 +34,11 @@ class ViewProducts extends React.Component {
                     headerRight: () =>(
                         <ShoppingCartIcon/>
                     )
+                }}/>
+
+                <ProductsStack.Screen name="ProductDetail" component={ProductDetail} options={{ 
+                    title: 'Product Detail',
+                    headerBackTitleVisible: false
                 }}/>
             </ProductsStack.Navigator>
         )

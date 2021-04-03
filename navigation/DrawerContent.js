@@ -37,7 +37,14 @@ export default function DrawerContent(props) {
                                                 <Text></Text>
                                             )}
                                     </Title>
-                                    <Caption style={styles.caption}>{auth.currentUser.email}</Caption>
+                                    <Caption style={styles.caption}>
+                                    {auth.currentUser ? (
+                                        <Text>{auth.currentUser.email}</Text>
+                                    ):(
+                                        <Text>  </Text>
+                                    )
+                                    }
+                                    </Caption>
                             </View>
                         </View>
                     </View>

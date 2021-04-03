@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Button } from 'react-native-elements'
 
 import { fire, auth, fireStore } from '../components/Firebase/firebase';
-
+import ProductDetailNav from '../screens/ProductDetail';
 
 
 export default class Products extends Component{
@@ -29,7 +29,8 @@ export default class Products extends Component{
                     id: child.key,
                     name: child.val().name,
                     price: child.val().price,
-                    quantity: child.val().quantity
+                    quantity: child.val().quantity,
+                    description: child.val().description
                 })
             })
             this.setState({products: prodArray})
@@ -81,8 +82,12 @@ export default class Products extends Component{
             />
         </View>
     )
-    renderItemHeader = () => (
-        <TouchableOpacity onPress={() => alert("On image press")} style={styles.itemHeader}>
+
+    onItemPress = () => {
+        <ProductDetail/>
+    }
+    renderItemHeader = (info) => (
+        <TouchableOpacity onPress={() => {this.props.navigation.navigate('ProductDetail', {data: info})}} style={styles.itemHeader}>
             <ImageBackground style={styles.itemHeader} source={{
                 uri: 'https://in-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06970886.png'
             }}/>
@@ -102,7 +107,7 @@ export default class Products extends Component{
                         renderItem = {({ item }) => (
                             <Card style={styles.productItem}>
     
-                                {this.renderItemHeader()}
+                                {this.renderItemHeader(item)}
                                 <View style={{ borderColor: '#E5E3DD', borderBottomWidth: 1, padding: 20, borderTopWidth: 1, }}>
                                     <Text>{item.name}</Text>
                                 </View>

@@ -4,7 +4,6 @@ import { registerWithEmail } from '../components/Firebase/firebase';
 
 import { db } from  '../components/Firebase/firebase';
 
-
 class Signup extends React.Component {
 
     state = {email: '', password: '', name: '', secondname: ''}
@@ -29,38 +28,38 @@ class Signup extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <TextInput
-                    style={styles.inputBox}
-                    value={this.state.name}
-                    onChangeText={name => this.setState({ name })}
-                    placeholder='Name'
-                />
+                    <TextInput
+                        style={styles.inputBox}
+                        value={this.state.name}
+                        onChangeText={name => this.setState({ name })}
+                        placeholder='Name'
+                    />
 
-                <TextInput
-                    style={styles.inputBox}
-                    value={this.state.secondname}
-                    onChangeText={secondname => this.setState({ secondname })}
-                    placeholder='Second name'
-                />
+                    <TextInput
+                        style={styles.inputBox}
+                        value={this.state.secondname}
+                        onChangeText={secondname => this.setState({ secondname })}
+                        placeholder='Second name'
+                    />
 
-                <TextInput
-                    style={styles.inputBox}
-                    value={this.state.email}
-                    onChangeText={email => this.setState({ email })}
-                    placeholder='Email'
-                    autoCapitalize='none'
-                />
-                <TextInput
-                    style={styles.inputBox}
-                    value={this.state.password}
-                    onChangeText={password => this.setState({ password })}
-                    placeholder='Password'
-                    secureTextEntry={true}
-                />
-                <TouchableOpacity style={styles.button} onPress={this.handleSingUp}>
-                    <Text style={styles.buttonText}>Signup</Text>
-                </TouchableOpacity>
-            </View>
+                    <TextInput
+                        style={styles.inputBox}
+                        value={this.state.email}
+                        onChangeText={email => this.setState({ email })}
+                        placeholder='Email'
+                        autoCapitalize='none'
+                    />
+                    <TextInput
+                        style={styles.inputBox}
+                        value={this.state.password}
+                        onChangeText={password => this.setState({ password })}
+                        placeholder='Password'
+                        secureTextEntry={true}
+                    />
+                    <TouchableOpacity style={styles.button} onPress={this.handleSingUp}>
+                        <Text style={styles.buttonText}>Signup</Text>
+                    </TouchableOpacity>
+                </View>
         )
     }
 }
@@ -70,7 +69,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center'
     },
     inputBox: {
         width: '85%',
