@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Button } from 'react-native';
-import { View, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
+import { View, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native'
 
 export default class ProductDetail extends Component{
   constructor(props){
     super(props);
     this.state = {
 
-    }
+    } 
   }
 
   renderHeader = (info) => (

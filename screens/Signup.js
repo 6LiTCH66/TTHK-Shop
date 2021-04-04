@@ -16,7 +16,8 @@ class Signup extends React.Component {
             db.collection("users").doc(data.user.uid).set({
                 name: name,
                 secondname: secondname,
-                email: email
+                email: email,
+                userPhoto: ''
             })
         })
         .catch(function(error){

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {View, StyleSheet, Text, NativeModules } from 'react-native';
 import { Avatar, Title, Drawer, Caption,} from 'react-native-paper';
 
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
@@ -8,10 +8,10 @@ import { logout } from '../components/Firebase/firebase'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { auth } from '../components/Firebase/firebase';
+import { auth, db, fireStorage } from '../components/Firebase/firebase';
 
 import GetUser from '../functions/GetUser';
-
+import GetUserPhoto from '../functions/GetUserPhoto';
 
 export default function DrawerContent(props) {
     return(
@@ -20,12 +20,15 @@ export default function DrawerContent(props) {
                 <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
                         <View style={{flexDirection: 'row', marginTop: 15}}>
-                            <Avatar.Image
+                            {/* <Avatar.Image
                                 source={{
-                                    uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm1vmQA9FgyAsC8zK9N0NPEBo03gYETUB97A&usqp=CAU'
+                                    uri: imageUrl
                                 }}
                                 size = {50}
-                            />
+                            /> */}
+                            <GetUserPhoto/>
+                            
+                            
                             <View style={{marginLeft:15, flexDirection: 'column'}}>
                                     <Title style={styles.title}>
                                         {auth.currentUser ?(
@@ -35,7 +38,7 @@ export default function DrawerContent(props) {
                                                 
                                             ):(
                                                 <Text></Text>
-                                            )}
+                                            )} 
                                     </Title>
                                     <Caption style={styles.caption}>
                                     {auth.currentUser ? (

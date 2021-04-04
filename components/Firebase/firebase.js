@@ -25,7 +25,7 @@ export const db = firebase.firestore();
 
 export const fire = firebase.database();
 
-export const fireStore = firebase.storage();
+export const fireStorage = firebase.storage();
 
 export const currentuser = auth.currentUser;
 

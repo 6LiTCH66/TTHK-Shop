@@ -1,32 +1,25 @@
 import React, { Component } from 'react'
-import { Button, Text, View, StyleSheet } from 'react-native'
+import { Button, Text, View, StyleSheet, Image } from 'react-native'
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { createStackNavigator} from '@react-navigation/stack';
 
-import { auth, logout } from '../components/Firebase/firebase';
-
 import ShoppingCartIcon from '../Icons/ShoppingCartIcon';
 
+import { fireStorage, auth, db } from '../components/Firebase/firebase'
+
+import * as ImagePicker from 'expo-image-picker';
+
+import { Alert } from 'react-native';
+
+import GetUserPhoto from '../functions/GetUserPhoto';
+
+import Profile from '../screens/Profile';
 
 const MyStack = createStackNavigator();
 
-const Home = () => {
-    return(
-        <View style={styles.container}>
-            <Text>Home Screen</Text>
-            <Text>{auth.currentUser.uid}</Text>
-            <Button
-                title="Logout"
-                onPress={() => logout()}
-            />
-        </View>
-    )
-} 
-
 class HomeScreen extends React.Component {
-
     render() {
         return (
             <MyStack.Navigator screenOptions={{
@@ -35,7 +28,7 @@ class HomeScreen extends React.Component {
                 },
                 headerTintColor: '#fff'
             }}>
-                <MyStack.Screen name="Profile" component={Home} options={{
+                <MyStack.Screen name="Profile" component={Profile} options={{
                     headerLeft: () => (
                         <Icon.Button 
                         name="ios-menu" 
@@ -52,6 +45,7 @@ class HomeScreen extends React.Component {
         )
     }
 }
+export default HomeScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -62,4 +56,3 @@ const styles = StyleSheet.create({
     }
 })
 
-export default HomeScreen
