@@ -18,17 +18,6 @@ class GetUserPhoto extends Component {
         this.getUserUri();
     
     }
-    componentDidMount(){
-        this.getUserUri();
-    }
-
-    componentDidUpdate(prevState){
-        if(this.state.userPhotoUri !== prevState.userPhotoUri){ // <==
-            this.getUserUri();
-        }
-        
-        
-    }
 
     async getUserUri(){
         const subscriber = await db.collection("users").doc(auth.currentUser.uid).onSnapshot(doc => {
@@ -43,7 +32,6 @@ class GetUserPhoto extends Component {
     }
 
     render() {
-        console.log(this.state.userPhotoUri);
         return (
             <Avatar.Image source={{uri: this.state.userPhotoUri !== "" ? this.state.userPhotoUri : undefined}} size={50}/>
         )

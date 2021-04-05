@@ -12,9 +12,9 @@ export default class ProductDetail extends Component{
 
   renderHeader = (info) => (
     <View style={styles.header}>
-    <ImageBackground style={styles.image} source={{ uri: 'https://in-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06970886.png' }} />
+    <ImageBackground style={styles.image} source={{ uri: info.image }} />
     <View style={styles.detailsContainer}>
-      <Text style={{ fontWeight: "bold", fontSize: 20,  }}>
+      <Text style={{ fontWeight: "bold", fontSize: 20 }}>
         {info.name}
       </Text>
       <Text style={styles.price}>

@@ -26,6 +26,8 @@ export default class Cart extends Component {
                     name: child.val().name,
                     price: child.val().price,
                     quantity: child.val().quantity,
+                    image: child.val().image,
+                    description: child.val().description
                 })
                 
             })
@@ -37,7 +39,7 @@ export default class Cart extends Component {
     renderItemHeader = (info) => (
         <TouchableOpacity onPress={() => alert("On image press")} style={styles.itemHeader}>
             <ImageBackground style={styles.image} source={{
-                uri: 'https://in-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06970886.png'
+                uri: info.image
             }}/>
         </TouchableOpacity>
     )
@@ -62,7 +64,7 @@ export default class Cart extends Component {
     renderRightSide = (info) => (
         <View style={styles.renderRight}>
             <Text style={styles.titleText}>{info.name}</Text>
-            <Text>${info.price}</Text>
+            <Text style={{ marginBottom: 10 }}>${info.price}</Text>
             <View style={styles.bottomItems}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start'}}>
                     <TouchableOpacity onPress={() => this.increaseItem(info)}>
@@ -78,6 +80,7 @@ export default class Cart extends Component {
                     </TouchableOpacity>
                 </View>
             </View>
+            <Text style={styles.descText}>{info.description}</Text>
 
             <View style={styles.renderLeft}>
                 <View>
@@ -93,8 +96,9 @@ export default class Cart extends Component {
 
 
     render(){
-        return(
-            <View>
+        if(this.state.products.length > 0){
+            return(
+                <View>
                     <FlatList
                         numColumns={1}
                         keyExtractor = {(item) => item.id}
@@ -103,17 +107,23 @@ export default class Cart extends Component {
                         style={styles.productList}
                         renderItem = {({ item }) => (
                             <Card style={styles.productItem}>
-
                                 <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                                    {this.renderItemHeader()}
+                                    {this.renderItemHeader(item)}
                                     {this.renderRightSide(item)}
                                     
                                 </View>
                             </Card>
                         )}
                     />
-                </View>
-        )
+                    </View>
+            )
+        }
+        else{
+            return(
+                <Text style={styles.noItems}>There are currently no items in your cart!</Text>
+            )
+        }
+        
     }
 }
 
@@ -149,20 +159,18 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
     },
     itemHeader: {
-        height: 130,
+        height: 210,
+        resizeMode: "contain",
         width: 170,
         
     },
     renderRight: {
         width: 50,
         flex: 2,
-        //backgroundColor: 'blue'
     },
     image: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        resizeMode: 'contain'
+        height: 210,
+        resizeMode: "contain",
     },
     titleText: {
         fontSize: 20,
@@ -191,8 +199,22 @@ const styles = StyleSheet.create({
     renderLeft:{
         position: 'absolute',
         right: 0,
-        marginTop: 40,
-        marginRight: 15,
-    } 
+        marginRight: 10,
+        marginTop: 75
+    },
+    descText : {
+        width: 110,
+        fontSize: 11,
+        fontWeight: '400',
+        color: "#888",
+        textAlign: 'left',
+        marginLeft: 7
+    },
+    noItems: {
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 30,
+        marginTop: Dimensions.get("window").height / 3
+    }
     
 })

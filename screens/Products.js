@@ -30,7 +30,8 @@ export default class Products extends Component{
                     name: child.val().name,
                     price: child.val().price,
                     quantity: child.val().quantity,
-                    description: child.val().description
+                    description: child.val().description,
+                    image: child.val().image
                 })
             })
             this.setState({products: prodArray})
@@ -43,16 +44,13 @@ export default class Products extends Component{
                     id: child.val().id,
                     name: child.val().name,
                     price: child.val().price,
-                    quantity: child.val().quantity
+                    quantity: child.val().quantity,
+                    description: child.val().description
                 })
                 
             })
             this.setState({userCart: userArray})
         })
-
-        //const ref = fireStore.child('shop/img.jpg').getDownloadUrl();
-        //const url = ref.getDownloadURL();
-        //console.log(ref);
 
     }
 
@@ -83,13 +81,10 @@ export default class Products extends Component{
         </View>
     )
 
-    onItemPress = () => {
-        <ProductDetail/>
-    }
     renderItemHeader = (info) => (
-        <TouchableOpacity onPress={() => {this.props.navigation.navigate('ProductDetail', {data: info})}} style={styles.itemHeader}>
+        <TouchableOpacity onPress={() => {this.props.navigation.navigate('ProductDetail', {data: info})}}>
             <ImageBackground style={styles.itemHeader} source={{
-                uri: 'https://in-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06970886.png'
+                uri: info.image
             }}/>
         </TouchableOpacity>
         
@@ -158,7 +153,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
     },
     itemHeader: {
-        height: 140,
+        height: 200,
+        resizeMode: "contain",
     }
     
 })

@@ -26,7 +26,17 @@ export default function DrawerContent(props) {
                                 }}
                                 size = {50}
                             /> */}
-                            <GetUserPhoto/>
+                            {auth.currentUser ?(
+                                <GetUserPhoto/>
+                            ):(
+                                <Avatar.Image
+                                source={{
+                                    uri: 'http://www.coogfans.com/uploads/db5902/original/3X/8/1/81173237ffa580ef710b0862fdddaac163274db1.jpeg'
+                                }}
+                                size = {50}
+                            />
+                            )}
+                            
                             
                             
                             <View style={{marginLeft:15, flexDirection: 'column'}}>
