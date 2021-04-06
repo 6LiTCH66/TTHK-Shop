@@ -14,20 +14,16 @@ import GetUser from '../functions/GetUser';
 import GetUserPhoto from '../functions/GetUserPhoto';
 
 export default function DrawerContent(props) {
+
     return(
         <View style={{flex:1}}>
             <DrawerContentScrollView {...props}>
                 <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
                         <View style={{flexDirection: 'row', marginTop: 15}}>
-                            {/* <Avatar.Image
-                                source={{
-                                    uri: imageUrl
-                                }}
-                                size = {50}
-                            /> */}
                             {auth.currentUser ?(
                                 <GetUserPhoto/>
+                                
                             ):(
                                 <Avatar.Image
                                 source={{
@@ -36,9 +32,6 @@ export default function DrawerContent(props) {
                                 size = {50}
                             />
                             )}
-                            
-                            
-                            
                             <View style={{marginLeft:15, flexDirection: 'column'}}>
                                     <Title style={styles.title}>
                                         {auth.currentUser ?(
@@ -54,7 +47,7 @@ export default function DrawerContent(props) {
                                     {auth.currentUser ? (
                                         <Text>{auth.currentUser.email}</Text>
                                     ):(
-                                        <Text>  </Text>
+                                        <Text> </Text>
                                     )
                                     }
                                     </Caption>

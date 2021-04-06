@@ -41,7 +41,6 @@ function MainStackScreens({ navigation }) {
             }}
 
             />
-            
             <MainStack.Screen 
             name="CartScreen" 
             component={CartScreen}

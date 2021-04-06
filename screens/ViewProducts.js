@@ -11,6 +11,8 @@ import Products from '../screens/Products';
 
 import ProductDetail from '../screens/ProductDetail';
 
+import CartScreen from '../screens/CartScreen';
+
 const ProductsStack = createStackNavigator();
 
 class ViewProducts extends React.Component {
@@ -33,6 +35,7 @@ class ViewProducts extends React.Component {
                     ),
                     headerRight: () =>(
                         <ShoppingCartIcon/>
+                        
                     )
                 }}/>
 

@@ -1,4 +1,5 @@
 import React, {Component, useState} from 'react'
+import { Button } from 'react-native';
 import { View, StyleSheet, Text, FlatList, Dimensions, ImageBackground, TouchableOpacity } from 'react-native'
 
 import { Card } from 'react-native-paper';
@@ -116,6 +117,7 @@ export default class Cart extends Component {
                         )}
                     />
                     </View>
+                    
             )
         }
         else{

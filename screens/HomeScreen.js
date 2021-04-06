@@ -1,21 +1,18 @@
 import React, { Component } from 'react'
 import { Button, Text, View, StyleSheet, Image } from 'react-native'
-
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import { createStackNavigator} from '@react-navigation/stack';
-
 import ShoppingCartIcon from '../Icons/ShoppingCartIcon';
-
 import { fireStorage, auth, db } from '../components/Firebase/firebase'
-
 import * as ImagePicker from 'expo-image-picker';
-
 import { Alert } from 'react-native';
-
 import GetUserPhoto from '../functions/GetUserPhoto';
-
 import Profile from '../screens/Profile';
+import CartScreen from '../screens/CartScreen';
+
+import ResetPassword from '../screens/ResetPassword';
+
+
 
 const MyStack = createStackNavigator();
 
@@ -41,6 +38,8 @@ class HomeScreen extends React.Component {
                         <ShoppingCartIcon/>
                     )
                 }}/>
+                <MyStack.Screen name="Cart" component={CartScreen}/>
+                <MyStack.Screen name="ResetPassword" component={ResetPassword}/>
             </MyStack.Navigator>
         )
     }
