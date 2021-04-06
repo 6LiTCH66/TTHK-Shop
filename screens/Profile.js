@@ -105,13 +105,11 @@ class Profile extends Component {
                         </View>
                         <View style={{alignItems: 'center'}}>
                             <Title style={styles.userData}>
-                                {auth.currentUser ?(
-                                    <Text>
-                                        <GetUser/>
-                                    </Text> 
-                                    ):(
-                                        <Text></Text>
-                                    )} 
+                            {auth.currentUser !== null ?(
+                                            <GetUser/>
+                                            ):(
+                                                <Text> </Text>
+                                            )} 
                             </Title>
                             <Caption style={styles.caption}>
                                     {auth.currentUser ?(
@@ -255,8 +253,9 @@ const styles = StyleSheet.create({
         marginLeft: 5
     },
     caption: {
-        fontSize: 14,
-        lineHeight: 14,
+        fontSize: 12,
+        lineHeight: 15,
+        
     },
 })
 

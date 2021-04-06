@@ -34,13 +34,10 @@ export default function DrawerContent(props) {
                             )}
                             <View style={{marginLeft:15, flexDirection: 'column'}}>
                                     <Title style={styles.title}>
-                                        {auth.currentUser ?(
-                                            <Text>
-                                                <GetUser/>
-                                            </Text> 
-                                                
+                                        {auth.currentUser !== null ?(
+                                            <GetUser/>
                                             ):(
-                                                <Text></Text>
+                                                <Text> </Text>
                                             )} 
                                     </Title>
                                     <Caption style={styles.caption}>
