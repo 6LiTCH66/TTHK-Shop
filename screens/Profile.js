@@ -33,7 +33,9 @@ class Profile extends Component {
             name: "",
             secondname: "",
             email: "",
-            getUserPhoto: ""
+            getUserPhoto: "",
+            newName: "",
+            newSecondName: ""
         }
         this.getPhoto();
     
@@ -65,9 +67,8 @@ class Profile extends Component {
                 const imageUri = await fireStorage.ref("images/" + auth.currentUser.uid).getDownloadURL();
                 db.collection("users").doc(auth.currentUser.uid).update({
                     userPhoto: imageUri
-        })
             })
-            .catch((error) => {
+            }).catch((error) => {
                 Alert.alert(error);
             })
         }
@@ -79,6 +80,20 @@ class Profile extends Component {
 
         var ref = fireStorage.ref().child("images/" + imageName);
         return ref.put(blob)
+    }
+    onChangeUserData = () => {
+        if(this.state.newName && this.state.newSecondName !== ""){
+            db.collection("users").doc(auth.currentUser.uid).update({
+                name: this.state.newName,
+                secondname: this.state.newSecondName
+            })
+            this.textInput.clear()
+            this.textInput2.clear()
+        }
+        else{
+            alert("Name or Secondname cannot be empty");
+        }
+        
     }
     render() {
         return (
@@ -105,18 +120,15 @@ class Profile extends Component {
                         </View>
                         <View style={{alignItems: 'center'}}>
                             <Title style={styles.userData}>
-                            {auth.currentUser !== null ?(
-                                            <GetUser/>
-                                            ):(
-                                                <Text> </Text>
-                                            )} 
+                                {auth.currentUser !== null ?
+                                (<GetUser/>)
+                                :(<Text> </Text>)} 
                             </Title>
+
                             <Caption style={styles.caption}>
-                                    {auth.currentUser ?(
-                                        <Text>{auth.currentUser.email}</Text>
-                                    ):(
-                                        <Text>Loading...</Text>
-                                    )}
+                                    {auth.currentUser ?
+                                    (<Text>{auth.currentUser.email}</Text>)
+                                    :(<Text>Loading...</Text>)}
                             </Caption>
                         </View>
                         <View style={{ position: 'absolute', right: 0, bottom: 0, marginRight: 10 }}>
@@ -147,19 +159,24 @@ class Profile extends Component {
 
                     <View style={{ marginTop: 15 }}>
                         <Text style={styles.userNameText}>Name</Text>
-                        <TextInput style={styles.input} value={this.state.name} autoCorrect={false}/>
+                        <TextInput style={styles.input} placeholder={this.state.name} autoCorrect={false}
+                            onChangeText={(text) => {this.setState({ newName: text })}}
+                            ref={input => { this.textInput = input }}
+                        />
                     </View>
                     <View style={{ marginTop: 15 }}>
                         <Text style={styles.userNameText}>Secondname</Text>
-                        <TextInput style={styles.input} value={this.state.secondname} autoCorrect={false}/>
+                        <TextInput style={styles.input} placeholder={this.state.secondname} autoCorrect={false} 
+                        onChangeText={(text) => {this.setState({ newSecondName: text })}}
+                        ref={input => { this.textInput2 = input }}
+                        />
                     </View>
                     
                     <View>
-                        <TouchableOpacity style={styles.button} onPress={() => alert('pressed')}>
+                        <TouchableOpacity style={styles.button} onPress={this.onChangeUserData}>
                                 <Text style={styles.buttonText}>Update</Text>
                         </TouchableOpacity>
                     </View>
-                    
                 </View>
                 
             </KeyboardAwareScrollView>
